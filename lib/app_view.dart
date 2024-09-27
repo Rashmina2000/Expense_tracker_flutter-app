@@ -10,8 +10,9 @@ class MyAppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Expense Tracker App",
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey.shade100,
         colorScheme: ColorScheme.light(
-            surface: Colors.grey.shade100,
+            //surface: Colors.grey.shade100,
             onSurface: Colors.black,
             primary: const Color(0xFF00B2E7),
             secondary: const Color(0xFFE064F7),
