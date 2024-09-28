@@ -12,11 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var widgetList = [
-    MainScreen(),
-    StaticScreen(),
-  ];
   int index = 0;
+  Color selectedColor = const Color(0xFF00B2E7);
+  Color unselectedColor = Colors.black38;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(
                   CupertinoIcons.home,
+                  color: index == 0 ? selectedColor : unselectedColor,
                 ),
                 label: "Home"),
             BottomNavigationBarItem(
                 icon: Icon(
                   CupertinoIcons.graph_square_fill,
+                  color: index == 1 ? selectedColor : unselectedColor,
                 ),
                 label: "Stats")
           ],
