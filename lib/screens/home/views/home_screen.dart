@@ -16,17 +16,24 @@ class _HomeScreenState extends State<HomeScreen> {
     MainScreen(),
     StaticScreen(),
   ];
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(),
-      body: MainScreen(),
+      body: index == 0 ? MainScreen() : StaticScreen(),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(30),
         ),
         child: BottomNavigationBar(
+          onTap: (value) {
+            setState(() {
+              index = value;
+              // Because on pressing bottom navigation it give value as 0,1
+            });
+          },
           backgroundColor: Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
