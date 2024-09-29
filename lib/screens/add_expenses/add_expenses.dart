@@ -161,7 +161,7 @@ class _AddExpensesState extends State<AddExpenses> {
                   DateTime? newDate = await showDatePicker(
                     context: context,
                     initialDate: selectDate,
-                    firstDate: DateTime.now(),
+                    firstDate: DateTime.now().subtract(Duration(days: 365)),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
 
