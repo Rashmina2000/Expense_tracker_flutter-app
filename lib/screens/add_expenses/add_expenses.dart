@@ -66,6 +66,8 @@ class _AddExpensesState extends State<AddExpenses> {
               ),
               SizedBox(height: 35),
               TextFormField(
+                readOnly: true,
+                onTap: () {},
                 controller: categoryController,
                 decoration: InputDecoration(
                   filled: true,
@@ -75,6 +77,74 @@ class _AddExpensesState extends State<AddExpenses> {
                     size: 18,
                     color: Colors.grey,
                   ),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (alert) {
+                              return AlertDialog(
+                                title: Text("Create a category"),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    TextFormField(
+                                      //controller: dateController,
+                                      //readOnly: true,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: "Name",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    TextFormField(
+                                      //controller: dateController,
+                                      //readOnly: true,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: "Icon",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    TextFormField(
+                                      //controller: dateController,
+                                      //readOnly: true,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: "Color",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.plus,
+                        size: 18,
+                        color: Colors.grey,
+                      )),
                   // label: Text("Category"), this label goes up when input clicks
                   hintText: "Category",
                   border: OutlineInputBorder(
