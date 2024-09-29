@@ -47,7 +47,23 @@ class AddExpenses extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              TextFormField(),
+              TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: const Icon(
+                    FontAwesomeIcons.list,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  // label: Text("Category"), this label goes up when input clicks
+                  hintText: "Category",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
               SizedBox(height: 16),
               TextFormField(),
               SizedBox(height: 16),
