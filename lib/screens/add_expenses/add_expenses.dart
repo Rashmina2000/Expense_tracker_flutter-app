@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class AddExpenses extends StatefulWidget {
   const AddExpenses({super.key});
@@ -9,6 +10,17 @@ class AddExpenses extends StatefulWidget {
 }
 
 class _AddExpensesState extends State<AddExpenses> {
+  TextEditingController expenseController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  DateTime selectDate = DateTime.now();
+
+  @override
+  void initState() {
+    dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,6 +48,7 @@ class _AddExpensesState extends State<AddExpenses> {
                 // Wrap the TextFormField with SizedBox with a width to take the size of SizedBox
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: TextFormField(
+                  controller: expenseController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -53,6 +66,7 @@ class _AddExpensesState extends State<AddExpenses> {
               ),
               SizedBox(height: 35),
               TextFormField(
+                controller: categoryController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -71,14 +85,23 @@ class _AddExpensesState extends State<AddExpenses> {
               ),
               SizedBox(height: 16),
               TextFormField(
+                controller: dateController,
                 readOnly: true,
-                onTap: () {
-                  showDatePicker(
+                onTap: () async {
+                  DateTime? newDate = await showDatePicker(
                     context: context,
-                    initialDate: DateTime.now(),
+                    initialDate: selectDate,
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
+
+                  if (newDate != null) {
+                    setState(() {
+                      dateController.text =
+                          DateFormat('dd/MM/yyyy').format(newDate);
+                      selectDate = newDate;
+                    });
+                  }
                 },
                 decoration: InputDecoration(
                   filled: true,
