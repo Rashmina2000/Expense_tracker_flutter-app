@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddExpenses extends StatelessWidget {
+class AddExpenses extends StatefulWidget {
   const AddExpenses({super.key});
 
+  @override
+  State<AddExpenses> createState() => _AddExpensesState();
+}
+
+class _AddExpensesState extends State<AddExpenses> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,7 +51,7 @@ class AddExpenses extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 35),
               TextFormField(
                 decoration: InputDecoration(
                   filled: true,
@@ -65,11 +70,52 @@ class AddExpenses extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              TextFormField(),
-              SizedBox(height: 16),
-              TextButton(
-                onPressed: () {},
-                child: Text("Save"),
+              TextFormField(
+                readOnly: true,
+                onTap: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(Duration(days: 365)),
+                  );
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: const Icon(
+                    FontAwesomeIcons.clock,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  // label: Text("Category"), this label goes up when input clicks
+                  hintText: "Date",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              SizedBox(height: 35),
+              SizedBox(
+                width: double.infinity,
+                height: kToolbarHeight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Save",
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
