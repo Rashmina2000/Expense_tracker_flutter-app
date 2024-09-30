@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AddExpenses extends StatefulWidget {
   const AddExpenses({super.key});
@@ -230,7 +231,61 @@ class _AddExpensesState extends State<AddExpenses> {
                                         ),
                                         TextFormField(
                                           //controller: dateController,
-                                          //readOnly: true,
+                                          readOnly: true,
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) {
+                                                  return AlertDialog(
+                                                    backgroundColor:
+                                                        Colors.grey,
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        ColorPicker(
+                                                          pickerColor:
+                                                              Colors.white,
+                                                          onColorChanged:
+                                                              (Color value) {},
+                                                        ),
+                                                        SizedBox(
+                                                          width:
+                                                              double.infinity,
+                                                          height:
+                                                              kToolbarHeight,
+                                                          child: TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  ctx);
+                                                            },
+                                                            child: Text(
+                                                              "Save",
+                                                              style: TextStyle(
+                                                                fontSize: 22,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                            style: TextButton
+                                                                .styleFrom(
+                                                              backgroundColor:
+                                                                  Colors.black,
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          },
                                           decoration: InputDecoration(
                                             isDense: true,
                                             filled: true,
