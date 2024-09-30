@@ -30,6 +30,8 @@ class _AddExpensesState extends State<AddExpenses> {
     'service'
   ];
 
+  String iconSelected = "";
+
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -179,21 +181,43 @@ class _AddExpensesState extends State<AddExpenses> {
                                                           .length,
                                                       itemBuilder:
                                                           (context, int i) {
-                                                        return Container(
-                                                          width: 50,
-                                                          height: 50,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border:
-                                                                Border.all(),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12),
-                                                            image:
-                                                                DecorationImage(
-                                                              image: AssetImage(
-                                                                  'assets/${myCategoryIcons[i]}.png'),
+                                                        return GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              iconSelected =
+                                                                  myCategoryIcons[
+                                                                      i];
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            width: 50,
+                                                            height: 50,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                width: iconSelected ==
+                                                                        myCategoryIcons[
+                                                                            i]
+                                                                    ? 5
+                                                                    : 2,
+                                                                color: iconSelected ==
+                                                                        myCategoryIcons[
+                                                                            i]
+                                                                    ? Colors
+                                                                        .green
+                                                                    : Colors
+                                                                        .grey,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
+                                                              image:
+                                                                  DecorationImage(
+                                                                image: AssetImage(
+                                                                    'assets/${myCategoryIcons[i]}.png'),
+                                                              ),
                                                             ),
                                                           ),
                                                         );
@@ -201,7 +225,7 @@ class _AddExpensesState extends State<AddExpenses> {
                                                 ),
                                               )
                                             : Container(),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 16,
                                         ),
                                         TextFormField(
