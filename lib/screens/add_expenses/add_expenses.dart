@@ -31,8 +31,6 @@ class _AddExpensesState extends State<AddExpenses> {
     'service'
   ];
 
-  String iconSelected = "";
-
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -102,6 +100,8 @@ class _AddExpensesState extends State<AddExpenses> {
                           context: context,
                           builder: (alert) {
                             bool isExpanded = false;
+                            String iconSelected = "";
+                            Color colorSelected = Colors.white;
                             return StatefulBuilder(
                               builder: (context, setState) {
                                 return AlertDialog(
@@ -245,9 +245,14 @@ class _AddExpensesState extends State<AddExpenses> {
                                                       children: [
                                                         ColorPicker(
                                                           pickerColor:
-                                                              Colors.white,
+                                                              colorSelected,
                                                           onColorChanged:
-                                                              (Color value) {},
+                                                              (Color value) {
+                                                            setState(() {
+                                                              colorSelected =
+                                                                  value;
+                                                            });
+                                                          },
                                                         ),
                                                         SizedBox(
                                                           width:
@@ -289,12 +294,38 @@ class _AddExpensesState extends State<AddExpenses> {
                                           decoration: InputDecoration(
                                             isDense: true,
                                             filled: true,
-                                            fillColor: Colors.white,
+                                            fillColor: colorSelected,
                                             hintText: "Color",
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               borderSide: BorderSide.none,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: kToolbarHeight,
+                                          child: TextButton(
+                                            onPressed: () {
+                                              //create category
+                                            },
+                                            child: Text(
+                                              "Save",
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            style: TextButton.styleFrom(
+                                              backgroundColor: Colors.black,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
                                             ),
                                           ),
                                         ),
