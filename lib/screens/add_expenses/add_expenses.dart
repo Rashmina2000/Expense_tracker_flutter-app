@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -81,65 +82,98 @@ class _AddExpensesState extends State<AddExpenses> {
                   suffixIcon: IconButton(
                       onPressed: () {
                         showDialog(
-                            context: context,
-                            builder: (alert) {
-                              return AlertDialog(
-                                title: Text("Create a category"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    TextFormField(
-                                      //controller: dateController,
-                                      //readOnly: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintText: "Name",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide.none,
+                          context: context,
+                          builder: (alert) {
+                            bool isExpanded = false;
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.grey.shade100,
+                                  title: Text("Create a category"),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextFormField(
+                                        //controller: dateController,
+                                        //readOnly: true,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: "Name",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide.none,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    TextFormField(
-                                      //controller: dateController,
-                                      //readOnly: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintText: "Icon",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide.none,
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      TextFormField(
+                                        onTap: () {
+                                          setState(() {
+                                            isExpanded = !isExpanded;
+                                          });
+                                        },
+                                        //controller: dateController,
+                                        readOnly: true,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: "Icon",
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.chevron_down),
+                                          border: OutlineInputBorder(
+                                            borderRadius: isExpanded
+                                                ? BorderRadius.vertical(
+                                                    top: Radius.circular(10),
+                                                  )
+                                                : BorderRadius.circular(10),
+                                            borderSide: BorderSide.none,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    TextFormField(
-                                      //controller: dateController,
-                                      //readOnly: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintText: "Color",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide.none,
+                                      isExpanded
+                                          ? Container(
+                                              width: double.infinity,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                  bottom: Radius.circular(10),
+                                                ),
+                                              ),
+                                            )
+                                          : Container(),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      TextFormField(
+                                        //controller: dateController,
+                                        //readOnly: true,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: "Color",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide.none,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                       icon: Icon(
                         FontAwesomeIcons.plus,
