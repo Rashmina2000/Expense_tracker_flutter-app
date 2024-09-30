@@ -16,6 +16,20 @@ class _AddExpensesState extends State<AddExpenses> {
   TextEditingController dateController = TextEditingController();
   DateTime selectDate = DateTime.now();
 
+  List<String> myCategoryIcons = [
+    'entertainment',
+    'food',
+    'grocery',
+    'home',
+    'payment',
+    'pet',
+    'shopping',
+    'tax',
+    'tech',
+    'travel',
+    'service'
+  ];
+
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -90,84 +104,123 @@ class _AddExpensesState extends State<AddExpenses> {
                                 return AlertDialog(
                                   backgroundColor: Colors.grey.shade100,
                                   title: Text("Create a category"),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextFormField(
-                                        //controller: dateController,
-                                        //readOnly: true,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          hintText: "Name",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: BorderSide.none,
+                                  content: SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextFormField(
+                                          //controller: dateController,
+                                          //readOnly: true,
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            hintText: "Name",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      TextFormField(
-                                        onTap: () {
-                                          setState(() {
-                                            isExpanded = !isExpanded;
-                                          });
-                                        },
-                                        //controller: dateController,
-                                        readOnly: true,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          hintText: "Icon",
-                                          suffixIcon:
-                                              Icon(CupertinoIcons.chevron_down),
-                                          border: OutlineInputBorder(
-                                            borderRadius: isExpanded
-                                                ? BorderRadius.vertical(
-                                                    top: Radius.circular(10),
-                                                  )
-                                                : BorderRadius.circular(10),
-                                            borderSide: BorderSide.none,
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        TextFormField(
+                                          onTap: () {
+                                            setState(() {
+                                              isExpanded = !isExpanded;
+                                            });
+                                          },
+                                          //controller: dateController,
+                                          readOnly: true,
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            hintText: "Icon",
+                                            suffixIcon: Icon(
+                                                CupertinoIcons.chevron_down),
+                                            border: OutlineInputBorder(
+                                              borderRadius: isExpanded
+                                                  ? BorderRadius.vertical(
+                                                      top: Radius.circular(10),
+                                                    )
+                                                  : BorderRadius.circular(10),
+                                              borderSide: BorderSide.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      isExpanded
-                                          ? Container(
-                                              width: double.infinity,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.vertical(
-                                                  bottom: Radius.circular(10),
+                                        isExpanded
+                                            ? Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                    bottom: Radius.circular(10),
+                                                  ),
                                                 ),
-                                              ),
-                                            )
-                                          : Container(),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      TextFormField(
-                                        //controller: dateController,
-                                        //readOnly: true,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          hintText: "Color",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: BorderSide.none,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: GridView.builder(
+                                                      gridDelegate:
+                                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                                        mainAxisSpacing: 5,
+                                                        crossAxisSpacing: 5,
+                                                        crossAxisCount: 3,
+                                                      ),
+                                                      itemCount: myCategoryIcons
+                                                          .length,
+                                                      itemBuilder:
+                                                          (context, int i) {
+                                                        return Container(
+                                                          width: 50,
+                                                          height: 50,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border:
+                                                                Border.all(),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            image:
+                                                                DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/${myCategoryIcons[i]}.png'),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                ),
+                                              )
+                                            : Container(),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        TextFormField(
+                                          //controller: dateController,
+                                          //readOnly: true,
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            hintText: "Color",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
