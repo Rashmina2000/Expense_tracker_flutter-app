@@ -238,7 +238,7 @@ class _AddExpensesState extends State<AddExpenses> {
                                                 builder: (ctx) {
                                                   return AlertDialog(
                                                     backgroundColor:
-                                                        Colors.grey,
+                                                        Colors.grey.shade100,
                                                     content: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
