@@ -1,9 +1,12 @@
 import 'dart:math';
+import 'package:expense_repository/expense_repository.dart';
 import 'package:expense_tracker_app/screens/add_expenses/add_expenses.dart';
+import 'package:expense_tracker_app/screens/add_expenses/blocs/create_categorybloc/create_category_bloc.dart';
 import 'package:expense_tracker_app/screens/home/views/main_screen.dart';
 import 'package:expense_tracker_app/screens/stats/stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,9 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const AddExpenses()));
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => BlocProvider(
+                create: (context) => CreateCategoryBloc(FirabaseExpenseRepo()),
+                child: const AddExpenses(),
+              ),
+            ),
+          );
         },
         child: Container(
           width: 60.0,
