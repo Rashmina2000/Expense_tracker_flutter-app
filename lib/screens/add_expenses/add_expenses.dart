@@ -1,6 +1,7 @@
 import 'package:expense_tracker_app/screens/add_expenses/category_creation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -92,9 +93,28 @@ class _AddExpensesState extends State<AddExpenses> {
                   // label: Text("Category"), this label goes up when input clicks
                   hintText: "Category",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(10)),
                     borderSide: BorderSide.none,
                   ),
+                ),
+              ),
+              Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(10),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, int i) {
+                        return const Card(child: ListTile());
+                      }),
                 ),
               ),
               SizedBox(height: 16),
