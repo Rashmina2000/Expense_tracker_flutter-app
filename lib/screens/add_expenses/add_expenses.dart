@@ -125,7 +125,7 @@ class _AddExpensesState extends State<AddExpenses> {
                                     scale: 1.5,
                                   ),
                                   title: Text(state.categories[i].name),
-                                  tileColor: Colors.red,
+                                  tileColor: Color(state.categories[i].color),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

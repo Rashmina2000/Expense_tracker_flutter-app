@@ -229,7 +229,7 @@ categoryCreation(BuildContext context) {
                                   category.categoryId = const Uuid().v1();
                                   category.name = categoryNameController.text;
                                   category.icon = iconSelected;
-                                  category.color = colorSelected.toString();
+                                  category.color = colorSelected.value;
                                   context
                                       .read<CreateCategoryBloc>()
                                       .add(CreateCategory(category));
