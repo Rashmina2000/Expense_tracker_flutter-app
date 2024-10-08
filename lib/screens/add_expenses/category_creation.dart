@@ -6,7 +6,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:uuid/uuid.dart';
 
-categoryCreation(BuildContext context) {
+Future categoryCreation(BuildContext context) {
   List<String> myCategoryIcons = [
     'entertainment',
     'food',
@@ -31,6 +31,7 @@ categoryCreation(BuildContext context) {
       TextEditingController categoryIconController = TextEditingController();
       TextEditingController categoryColorController = TextEditingController();
       bool isLoading = false;
+      Category category = Category.empty;
       return BlocProvider.value(
         value: context.read<CreateCategoryBloc>(),
         child: StatefulBuilder(
@@ -41,7 +42,7 @@ categoryCreation(BuildContext context) {
                   setState(() {
                     isLoading = false;
                   });
-                  Navigator.pop(alert);
+                  Navigator.pop(alert, category);
                 } else if (state is CreateCategoryLoading) {
                   setState(() {
                     isLoading = true;
@@ -225,11 +226,13 @@ categoryCreation(BuildContext context) {
                               )
                             : TextButton(
                                 onPressed: () {
-                                  Category category = Category.empty;
-                                  category.categoryId = const Uuid().v1();
-                                  category.name = categoryNameController.text;
-                                  category.icon = iconSelected;
-                                  category.color = colorSelected.value;
+                                  setState(() {
+                                    category.categoryId = const Uuid().v1();
+                                    category.name = categoryNameController.text;
+                                    category.icon = iconSelected;
+                                    category.color = colorSelected.value;
+                                  });
+
                                   context
                                       .read<CreateCategoryBloc>()
                                       .add(CreateCategory(category));
