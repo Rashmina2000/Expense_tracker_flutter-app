@@ -1,7 +1,9 @@
+import 'package:expense_tracker_app/screens/add_expenses/blocs/get_categories_bloc/get_categories_bloc.dart';
 import 'package:expense_tracker_app/screens/add_expenses/category_creation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -110,11 +112,33 @@ class _AddExpensesState extends State<AddExpenses> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (context, int i) {
-                        return const Card(child: ListTile());
-                      }),
+                  child: BlocBuilder<GetCategoriesBloc, GetCategoriesState>(
+                    builder: (context, state) {
+                      if (state is GetCategoriesSuccess) {
+                        return ListView.builder(
+                            itemCount: state.categories.length,
+                            itemBuilder: (context, int i) {
+                              return Card(
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    'assets/${state.categories[i].icon}.png',
+                                    scale: 1.5,
+                                  ),
+                                  title: Text(state.categories[i].name),
+                                  tileColor: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
+                            });
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: 16),
