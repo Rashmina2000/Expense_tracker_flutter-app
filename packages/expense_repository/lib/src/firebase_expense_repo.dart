@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_repository/expense_repository.dart';
+import 'package:expense_repository/src/entities/entities.dart';
 
 class FirabaseExpenseRepo implements ExpenseRepository {
   final categoryCollection =
@@ -38,6 +39,18 @@ class FirabaseExpenseRepo implements ExpenseRepository {
       await expenseCollection
           .doc(expense.expenseId)
           .set(expense.toEntity().toDocument());
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Expense>> getExpenses() async {
+    try {
+      return await expenseCollection.get().then((value) => value.docs
+          .map((e) => Expense.fromEntity(ExpenseEntity.fromDocument(e.data())))
+          .toList());
     } catch (e) {
       log(e.toString());
       rethrow;
