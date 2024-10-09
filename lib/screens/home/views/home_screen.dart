@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expense_tracker_app/screens/add_expenses/add_expenses.dart';
 import 'package:expense_tracker_app/screens/add_expenses/blocs/create_categorybloc/create_category_bloc.dart';
+import 'package:expense_tracker_app/screens/add_expenses/blocs/create_expense_bloc/create_expense_bloc.dart';
 import 'package:expense_tracker_app/screens/add_expenses/blocs/get_categories_bloc/get_categories_bloc.dart';
 import 'package:expense_tracker_app/screens/home/views/main_screen.dart';
 import 'package:expense_tracker_app/screens/stats/stats.dart';
@@ -74,7 +75,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     create: (context) => GetCategoriesBloc(
                       FirabaseExpenseRepo(),
                     )..add(GetCategories()),
-                  )
+                  ),
+                  BlocProvider(
+                    create: (context) => CreateExpenseBloc(
+                      FirabaseExpenseRepo(),
+                    ),
+                  ),
                 ],
                 child: const AddExpenses(),
               ),
