@@ -1,6 +1,13 @@
 # Expense Tracker
 
-A new Flutter project.
+<img src="https://github.com/user-attachments/assets/c296f8de-4910-438c-a8a7-7435f996d0dc" width="250">
+<img src="https://github.com/user-attachments/assets/42e1d7b4-b788-444e-963b-a411ee0a55f3" width="250">
+<img src="https://github.com/user-attachments/assets/1980dfab-2110-46fd-b40f-d092a17938c0" width="250">
+<img src="https://github.com/user-attachments/assets/401ecf0a-1cd8-4298-8590-b9b59b54e15a" width="250">
+<img src="https://github.com/user-attachments/assets/974e5197-195e-48b8-ac71-18a0cb73b516" width="250"><br><br>
+
+- A simple and intuitive Expense Tracker app built with Flutter.
+<br><br>
 
 ## Built With
 
